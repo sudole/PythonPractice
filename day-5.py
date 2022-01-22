@@ -1,5 +1,6 @@
 import configparser
 import json
+import statistics
 import requests
 from bs4 import BeautifulSoup
 
@@ -55,9 +56,56 @@ class LottoManager:
             print('============================')
         return self.resultArray
 
+    def statisticsNumber(self, lottoResults):
+        statistics = {}
+        for result in lottoResults:
+            jsonResult = json.loads(result)
+            for num in jsonResult['WinningNumbers']:
+                print(num)
+                if is_json_key_present(statistics, num):
+                    count = statistics[num]
+                    statistics[num] = int(count) + 1
+                else:
+                    statistics[num] = 1
+        print(json.dumps(statistics, sort_keys=True, indent=4))
+        return statistics
+
+    def maxNumber(self, statistics):
+        max = 0
+        maxNumber = 0
+        for n in statistics:
+            if statistics[n] > max:
+                max = statistics[n]
+                maxNumber = n
+        print('max number >>> ', maxNumber)
+        return maxNumber
+
+    def minNumber(self, statistics):
+        min = 9999999
+        minNumber = 0
+        for n in statistics:
+            if statistics[n] < min:
+                min = statistics[n]
+                minNumber = n
+        print('min number >>> ', minNumber)
+        return minNumber
+
+def is_json_key_present(jsonObj, key):
+    try:
+        buf = jsonObj[key]
+    except KeyError:
+        return False
+    else:
+        pass
+    return True
+
 
 lottoMng = LottoManager()
 lastNum = int(lottoMng.inquireRecentRound())
 lottoResults = lottoMng.inquireWinningNum(lastNum-9, lastNum)
 # for result in lottoResults:
 #     print(result)
+
+lottoStat = lottoMng.statisticsNumber(lottoResults)
+maxNumber = lottoMng.maxNumber(lottoStat)
+minNumber = lottoMng.minNumber(lottoStat)
