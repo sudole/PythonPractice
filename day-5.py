@@ -1,6 +1,5 @@
 import configparser
 import json
-import statistics
 import requests
 from bs4 import BeautifulSoup
 
