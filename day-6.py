@@ -12,6 +12,24 @@ def checkPath(path):
         path_type = "dir"
     return path_type
 
-path = input("input path :: ")
-print("path = ", path)
-print(checkPath(path))
+def readFile(path):
+    content = ''
+    f = open(path, "r", encoding="utf-8")
+    while True:
+        line = f.readline()
+        if not line: break
+        content += line
+    f.close()
+    return content
+
+def start():
+    path = input("input path :: ")
+    # print("path = ", path)
+    path_type = checkPath(path)
+    # print(path_type)
+
+    if (path_type == "file"):
+        content = readFile(path)
+        # print(content)
+
+start()
