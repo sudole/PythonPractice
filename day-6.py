@@ -1,5 +1,6 @@
 # Let's read the file and find the word you want
 
+from inspect import getfile
 import os
 
 def checkPath(path):
@@ -22,6 +23,10 @@ def readFile(path):
     f.close()
     return content
 
+def getFileList(path):
+    file_list = os.listdir(path)
+    return file_list
+
 def start():
     path = input("input path :: ")
     # print("path = ", path)
@@ -31,5 +36,15 @@ def start():
     if (path_type == "file"):
         content = readFile(path)
         # print(content)
+
+    if (path_type == "dir"):
+        dir_list = getFileList(path)
+        for item_path in dir_list:
+            if (checkPath(item_path) == "file"):
+                #print(item_path)
+                content = readFile(item_path)
+                #print(content)
+            #else:
+            #    print("directory pass (", item_path, ")")
 
 start()
