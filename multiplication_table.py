@@ -1,6 +1,8 @@
 def multiplication_table(number):
     for n in range(1, 10):
         print(number, "*", n, "=", n*number)
+        # formatting
+        # print("%d * %d = %d" % (number, n, n*number))
 
 def displayMenu():
     print("="*22)
