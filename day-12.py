@@ -10,5 +10,8 @@ def q_4():
   for i in range(1, 101):
     print(i)
     
-q_3()
-q_4()
+def show():
+  q_3()
+  q_4()
+
+show()
