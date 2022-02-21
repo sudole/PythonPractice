@@ -1,8 +1,14 @@
 def multiplication_table(number):
-    for n in range(1, 10):
-        print(number, "*", n, "=", n*number)
+    return [multiple(n, number) for n in range(1, 10)]
         # formatting
         # print("%d * %d = %d" % (number, n, n*number))
+        
+def multiple(x, y):
+    return x*y
+
+def displayList(number, list):
+    for idx in range(len(list)):
+        print("%d * %d = %d" % (number, idx+1, list[idx]))
 
 def displayMenu():
     print("="*22)
@@ -19,10 +25,10 @@ def start():
     if select == "1":
         for i in range(1, 10):
             print("-"*20)
-            multiplication_table(i)
+            displayList(i, multiplication_table(i))
             
     else:
-        number = input("Input Number >>")
-        multiplication_table(int(number))
+        number = int(input("Input Number >>"))
+        displayList(number, multiplication_table(number))
         
 start()
